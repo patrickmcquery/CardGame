@@ -37,36 +37,32 @@ public class Hand {
         return hand.get(i);
     }
 
-    public ArrayList<Integer> getTotal()
+    public int[] getTotal()
     {
         int val = 0;
-        ArrayList<Integer> tempList = new ArrayList<Integer>(2);
+        int[] tempList = {0,0};
         boolean containsAce = false;
         for(int i = 0; i < hand.size(); i++)
         {
-            if(hand.get(i).getInt() == 1)
-            {
-                containsAce = true;
-            }
+
         }
-        if(!containsAce)
-        {
             for(int i = 0; i < hand.size(); i++)
             {
-                val += hand.get(i).getInt();
-            }
-            tempList.add(val);
-        } else
-        {
-            for(int i = 0; i < hand.size(); i++)
-            {
-                val += hand.get(i).getInt();
                 if(hand.get(i).getInt() == 1)
                 {
-
+                    containsAce = true;
+                }
+                val += hand.get(i).getInt();
+            }
+            tempList[0] = val;
+            if(containsAce)
+            {
+                val += 10;
+                if(val <= 21)
+                {
+                    tempList[1] = val;
                 }
             }
-        }
         return tempList;
     }
     public String toString()

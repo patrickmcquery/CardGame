@@ -23,29 +23,95 @@ public class BlackJack {
     {
         newShoe();
         newDeal();
-        boolean playing = true;
+        boolean playersPlaying = true;
         Scanner console = new Scanner(System.in);
-        while(playing)
+        ArrayList<Boolean> playerCanPlay = new ArrayList<Boolean>(numPlayers);
+        for(int i = 0; i < numPlayers; i++)
+        {
+            playerCanPlay.add(i, true);
+        }
+        ArrayList<Boolean> playerWins = new ArrayList<Boolean>(numPlayers + 1);
+        for(int i = 0; i <= numPlayers; i++)
+        {
+            playerWins.add(i, false);
+        }
+        while(playersPlaying)
         {
             showBoard();
             for(int i = 0; i < numPlayers; i++)
             {
-                int player = i + 1;
-                System.out.println("Player " + player + " what would you like to do?");
-                String resp = console.nextLine();
-                switch (resp.toLowerCase().charAt(0))
+                if(playerCanPlay.get(i))
                 {
-                    case 'h':
-                        hands.get(i).getHand().add(shoe.pop());
-                    case 's':
-                        ;
-                    default:
-                        System.out.println("Invalid response given, please try again.");
+
+                    int player = i + 1;
+                    System.out.println("Player " + player + " what would you like to do?");
+                    String resp = console.nextLine();
+                    switch (resp.toLowerCase().charAt(0)) {
+                        case 'h':
+                        {
+                            hands.get(i).getHand().add(shoe.pop());
+                            break;
+                        }
+                        case 's':
+                        {
+                            System.out.println("Player " + player + " decides to stand.");
+                            playerCanPlay.set(i, false);
+                            break;
+                        }
+                        default:
+                        {
+                            System.out.println("Invalid response given, please try again.");
+                            break;
+                        }
+                    }
                 }
+                if(!playerCanPlay.contains(true))
+                {
+                    playersPlaying = false;
+                }
+
             }
-            if(hands.get(numPlayers).getTotal()[0] < 17 || hands.get(numPlayers).getTotal()[1] < 17 )
+        }
+        playersPlaying = true;
+        while(playersPlaying)
+        {
+            if (hands.get(numPlayers).getTotal()[0] == 21 || hands.get(numPlayers).getTotal()[1] == 21)
+            {
+                playersPlaying = false;
+                playerWins.set(numPlayers, true);
+
+            } else if(hands.get(numPlayers).getTotal()[0] >= 17 || hands.get(numPlayers).getTotal()[1] >= 17)
+            {
+                playersPlaying = false;
+            }
+            else if(hands.get(numPlayers).getTotal()[0] < 17 || hands.get(numPlayers).getTotal()[1] < 17)
             {
                 hands.get(numPlayers).getHand().add(shoe.pop());
+            }
+        }
+        hands.get(numPlayers).getHand().get(0).unhide();
+        for(int i = 0; i < numPlayers; i++)
+        {
+            if(hands.get(i).getTotal()[0] > hands.get(numPlayers).getTotal()[0] && hands.get(i).getTotal()[0] < 22)
+            {
+                playerWins.set(i, true);
+            }
+        }
+        showBoard();
+        for(int i = 0; i <= numPlayers; i++)
+        {
+            int player = i + 1;
+
+            if(i == numPlayers)
+            {
+                if(playerWins.get(i) == true)
+                {
+                    System.out.println("Dealer wins!");
+                }
+            }
+            if(playerWins.get(i) == true)
+            {
+                System.out.println("Player " + player + " won!");
             }
         }
     }
