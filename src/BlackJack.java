@@ -40,28 +40,40 @@ public class BlackJack {
             showBoard();
             for(int i = 0; i < numPlayers; i++)
             {
-                if(playerCanPlay.get(i))
-                {
-
-                    int player = i + 1;
-                    System.out.println("Player " + player + " what would you like to do?");
-                    String resp = console.nextLine();
-                    switch (resp.toLowerCase().charAt(0)) {
-                        case 'h':
-                        {
-                            hands.get(i).getHand().add(shoe.pop());
-                            break;
+                if(playerCanPlay.get(i)) {
+                    boolean currentPlayerPlaying = true;
+                    boolean currentPlayerBust = false;
+                    while (currentPlayerPlaying)
+                    {
+                        int player = i + 1;
+                        System.out.println("Player " + player + " what would you like to do?");
+                        String resp = console.nextLine();
+                        switch (resp.toLowerCase().charAt(0)) {
+                            case 'h': {
+                                hands.get(i).getHand().add(shoe.pop());
+                                if(hands.get(i).getTotal()[0] > 21)
+                                {
+                                    currentPlayerPlaying = false;
+                                    playerCanPlay.set(i, false);
+                                    currentPlayerBust = true;
+                                }
+                                break;
+                            }
+                            case 's': {
+                                System.out.println("Player " + player + " decides to stand.");
+                                currentPlayerPlaying = false;
+                                playerCanPlay.set(i, false);
+                                break;
+                            }
+                            default: {
+                                System.out.println("Invalid response given, please try again.");
+                                break;
+                            }
                         }
-                        case 's':
+                        showBoard();
+                        if(currentPlayerBust)
                         {
-                            System.out.println("Player " + player + " decides to stand.");
-                            playerCanPlay.set(i, false);
-                            break;
-                        }
-                        default:
-                        {
-                            System.out.println("Invalid response given, please try again.");
-                            break;
+                            System.out.println("Player " + player + " you have busted.");
                         }
                     }
                 }
@@ -72,7 +84,10 @@ public class BlackJack {
 
             }
         }
+
+        //Dealers turn begins
         playersPlaying = true;
+        boolean dealerBusted = false;
         while(playersPlaying)
         {
             if (hands.get(numPlayers).getTotal()[0] == 21 || hands.get(numPlayers).getTotal()[1] == 21)
@@ -87,6 +102,10 @@ public class BlackJack {
             else if(hands.get(numPlayers).getTotal()[0] < 17 || hands.get(numPlayers).getTotal()[1] < 17)
             {
                 hands.get(numPlayers).getHand().add(shoe.pop());
+                if(hands.get(numPlayers).getTotal()[0] > 21)
+                {
+                    dealerBusted = true;
+                }
             }
         }
         hands.get(numPlayers).getHand().get(0).unhide();
@@ -98,27 +117,33 @@ public class BlackJack {
             }
         }
         showBoard();
-        for(int i = 0; i <= numPlayers; i++)
+        if(dealerBusted)
+        {
+            for(int i = 0; i < numPlayers; i++)
+            {
+                if(hands.get(i).getTotal()[0] < 22)
+                {
+                    playerWins.set(i, true);
+                }
+            }
+            System.out.println("Dealer busted.");
+        }
+        for(int i = 0; i < numPlayers; i++)
         {
             int player = i + 1;
 
-            if(i == numPlayers)
-            {
-                if(playerWins.get(i) == true)
-                {
-                    System.out.println("Dealer wins!");
-                }
-            }
             if(playerWins.get(i) == true)
             {
                 System.out.println("Player " + player + " won!");
+            }else if(playerWins.get(i) == false)
+            {
+                System.out.println("Player " + player + " lost.");
             }
         }
     }
     private void showBoard()
     {
         System.out.println("Dealer has: ");
-        hands.get(numPlayers).getHand().get(0).hide();
         System.out.println(hands.get(numPlayers));
         showPlayers();
     }
@@ -146,6 +171,7 @@ public class BlackJack {
                 hands.get(j).getHand().add(shoe.pop());
             }
         }
+        hands.get(numPlayers).getHand().get(0).hide();
     }
 
     private void newShoe()
