@@ -56,6 +56,7 @@ public class BlackJack {
                                     currentPlayerPlaying = false;
                                     playerCanPlay.set(i, false);
                                     currentPlayerBust = true;
+                                    playerWins.set(i, false);
                                 }
                                 break;
                             }
@@ -88,6 +89,15 @@ public class BlackJack {
         //Dealers turn begins
         playersPlaying = true;
         boolean dealerBusted = false;
+
+        for(int i = 0; i < numPlayers; i++)
+        {
+            if(!playerWins.contains(true))
+            {
+                playersPlaying = false;
+            }
+        }
+
         while(playersPlaying)
         {
             if (hands.get(numPlayers).getTotal()[0] == 21 || hands.get(numPlayers).getTotal()[1] == 21)
@@ -105,13 +115,17 @@ public class BlackJack {
                 if(hands.get(numPlayers).getTotal()[0] > 21)
                 {
                     dealerBusted = true;
+                    playersPlaying = false;
                 }
             }
         }
         hands.get(numPlayers).getHand().get(0).unhide();
+        //Dealer turn ends
+
+        // INSERT NOTEBOOK LOGIC
         for(int i = 0; i < numPlayers; i++)
         {
-            if(hands.get(i).getTotal()[0] > hands.get(numPlayers).getTotal()[0] && hands.get(i).getTotal()[0] < 22)
+            if(hands.get(i).getTotal()[0] >= hands.get(numPlayers).getTotal()[0] && hands.get(i).getTotal()[0] < 22)
             {
                 playerWins.set(i, true);
             }
@@ -134,7 +148,14 @@ public class BlackJack {
 
             if(playerWins.get(i) == true)
             {
-                System.out.println("Player " + player + " won!");
+                if(hands.get(i).getTotal()[0] == hands.get(numPlayers).getTotal()[0])
+                {
+                    System.out.println("PLayer " + player + " tied.");
+                }
+                else
+                {
+                    System.out.println("Player " + player + " won!");
+                }
             }else if(playerWins.get(i) == false)
             {
                 System.out.println("Player " + player + " lost.");
