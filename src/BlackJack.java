@@ -90,13 +90,14 @@ public class BlackJack {
         playersPlaying = true;
         boolean dealerBusted = false;
 
-        for(int i = 0; i < numPlayers; i++)
+        /*for(int i = 0; i < numPlayers; i++)
         {
             if(!playerWins.contains(true))
             {
                 playersPlaying = false;
             }
         }
+         */
 
         while(playersPlaying)
         {
@@ -120,17 +121,34 @@ public class BlackJack {
             }
         }
         hands.get(numPlayers).getHand().get(0).unhide();
+        boolean useDealerSecond = false;
+        if(hands.get(numPlayers).getTotal()[0] < hands.get(numPlayers).getTotal()[1] && hands.get(numPlayers).getTotal()[1] < 22)
+        {
+            useDealerSecond = true;
+        }
         //Dealer turn ends
 
         // INSERT NOTEBOOK LOGIC
+
+        showBoard();
+
         for(int i = 0; i < numPlayers; i++)
         {
-            if(hands.get(i).getTotal()[0] >= hands.get(numPlayers).getTotal()[0] && hands.get(i).getTotal()[0] < 22)
+            for(int j = 0; j < 2; j++)
             {
-                playerWins.set(i, true);
+                if(hands.get(i).getTotal()[j] < 22)
+                {
+                    if (hands.get(i).getTotal()[j] >= hands.get(numPlayers).getTotal()[0] && hands.get(numPlayers).getTotal()[0] < 22 && !useDealerSecond)
+                    {
+                        playerWins.set(i, true);
+                    } else if (hands.get(i).getTotal()[j] >= hands.get(numPlayers).getTotal()[1] && hands.get(numPlayers).getTotal()[1] < 22 && useDealerSecond)
+                    {
+                        playerWins.set(i, true);
+                    }
+                }
             }
         }
-        showBoard();
+
         if(dealerBusted)
         {
             for(int i = 0; i < numPlayers; i++)
@@ -148,7 +166,7 @@ public class BlackJack {
 
             if(playerWins.get(i) == true)
             {
-                if(hands.get(i).getTotal()[0] == hands.get(numPlayers).getTotal()[0])
+                if(hands.get(i).getTotal()[0] == hands.get(numPlayers).getTotal()[0] || hands.get(i).getTotal()[1] == hands.get(numPlayers).getTotal()[0])
                 {
                     System.out.println("PLayer " + player + " tied.");
                 }

@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14002b8c-d18f-4015-af5d-d40af797b68f" name="Changes" comment="Second day of work.">
+    <list default="true" id="14002b8c-d18f-4015-af5d-d40af797b68f" name="Changes" comment="Work from programming club">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BlackJack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BlackJack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hand.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +59,9 @@
       <workItem from="1674076857850" duration="14209000" />
       <workItem from="1674149164581" duration="5162000" />
       <workItem from="1674251759073" duration="2504000" />
-      <workItem from="1674257146052" duration="1685000" />
+      <workItem from="1674257146052" duration="1727000" />
+      <workItem from="1674495001136" duration="841000" />
+      <workItem from="1674505975857" duration="2595000" />
     </task>
     <task id="LOCAL-00001" summary="First day of work">
       <created>1674145426088</created>
@@ -81,7 +84,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674254378519</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Work from programming club">
+      <created>1674259663920</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1674259663920</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -102,7 +112,8 @@
     <MESSAGE value="First day of work" />
     <MESSAGE value="Work from in class." />
     <MESSAGE value="Second day of work." />
-    <option name="LAST_COMMIT_MESSAGE" value="Second day of work." />
+    <MESSAGE value="Work from programming club" />
+    <option name="LAST_COMMIT_MESSAGE" value="Work from programming club" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

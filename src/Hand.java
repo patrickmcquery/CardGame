@@ -42,27 +42,24 @@ public class Hand {
         int val = 0;
         int[] tempList = {0,0};
         boolean containsAce = false;
+
         for(int i = 0; i < hand.size(); i++)
         {
-
+            if(hand.get(i).getInt() == 1)
+            {
+                containsAce = true;
+            }
+            val += hand.get(i).getInt();
         }
-            for(int i = 0; i < hand.size(); i++)
+        tempList[0] = val;
+        if(containsAce)
+        {
+            val += 10;
+            if(val <= 21)
             {
-                if(hand.get(i).getInt() == 1)
-                {
-                    containsAce = true;
-                }
-                val += hand.get(i).getInt();
+                tempList[1] = val;
             }
-            tempList[0] = val;
-            if(containsAce)
-            {
-                val += 10;
-                if(val <= 21)
-                {
-                    tempList[1] = val;
-                }
-            }
+        }
         return tempList;
     }
     public String toString()
