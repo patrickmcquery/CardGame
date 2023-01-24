@@ -7,15 +7,13 @@ public class BlackJack {
 
     private final int SHOELENGTH = 4;
     private int numPlayers;
-    private int diff;
     private Stack<Card> shoe;
 
     private ArrayList<Hand> hands;
-    public BlackJack(int inNumPlayers, int inDiff)
+    public BlackJack(int inNumPlayers)
     {
         numPlayers = inNumPlayers;
         hands = new ArrayList<Hand>(numPlayers);
-        diff = inDiff;
         shoe = new Stack<Card>();
     }
 
@@ -46,29 +44,42 @@ public class BlackJack {
                     while (currentPlayerPlaying)
                     {
                         int player = i + 1;
-                        System.out.println("Player " + player + " what would you like to do?");
-                        String resp = console.nextLine();
-                        switch (resp.toLowerCase().charAt(0)) {
-                            case 'h': {
-                                hands.get(i).getHand().add(shoe.pop());
-                                if(hands.get(i).getTotal()[0] > 21)
+                        if(hands.get(i).getTotal()[0] == 21 || hands.get(i).getTotal()[1] == 21)
+                        {
+                            currentPlayerPlaying = false;
+                            playerCanPlay.set(i, false);
+                            playerWins.set(i, true);
+                            System.out.println("Player " + player + " got a blackjack!");
+                        }
+                        else
+                        {
+                            System.out.println("Player " + player + " what would you like to do?");
+                            String resp = console.nextLine();
+                            switch (resp.toLowerCase().charAt(0))
+                            {
+                                case 'h':
                                 {
+                                    hands.get(i).getHand().add(shoe.pop());
+                                    if (hands.get(i).getTotal()[0] > 21)
+                                    {
+                                        currentPlayerPlaying = false;
+                                        playerCanPlay.set(i, false);
+                                        currentPlayerBust = true;
+                                        playerWins.set(i, false);
+                                    }
+                                    break;
+                                }
+                                case 's':
+                                {
+                                    System.out.println("Player " + player + " decides to stand.");
                                     currentPlayerPlaying = false;
                                     playerCanPlay.set(i, false);
-                                    currentPlayerBust = true;
-                                    playerWins.set(i, false);
+                                    break;
                                 }
-                                break;
-                            }
-                            case 's': {
-                                System.out.println("Player " + player + " decides to stand.");
-                                currentPlayerPlaying = false;
-                                playerCanPlay.set(i, false);
-                                break;
-                            }
-                            default: {
-                                System.out.println("Invalid response given, please try again.");
-                                break;
+                                default: {
+                                    System.out.println("Invalid response given, please try again.");
+                                    break;
+                                }
                             }
                         }
                         showBoard();
@@ -105,6 +116,7 @@ public class BlackJack {
             {
                 playersPlaying = false;
                 playerWins.set(numPlayers, true);
+                System.out.println("The Dealer got a blackjack.");
 
             } else if(hands.get(numPlayers).getTotal()[0] >= 17 || hands.get(numPlayers).getTotal()[1] >= 17)
             {
