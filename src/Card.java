@@ -1,8 +1,14 @@
-public class Card {
+/*
+    The card class stores the card value (1-13 + joker) and the suit.
+    Both values are set by the deck class. Cards can be hidden (face down)
+    and will return blanks if it is true.
 
-    private int val;
-    private char suit;
-
+    Extra Credit: Switch/Case on line 37
+*/
+public class Card
+{
+    private final int val;
+    private final char suit;
     private boolean hidden;
     public Card(int inVal, char inSuit)
     {
@@ -10,7 +16,6 @@ public class Card {
         val = inVal;
         suit = inSuit;
     }
-
     public void hide()
     {
         hidden = true;
@@ -19,7 +24,6 @@ public class Card {
     {
         hidden = false;
     }
-
     public boolean isHidden()
     {
         return hidden;
@@ -40,7 +44,6 @@ public class Card {
             default: return (char)(val + '0');
         }
     }
-
     public int getInt()
     {
         if(val < 10)
@@ -57,7 +60,8 @@ public class Card {
         if(val == 0)
         {
             return '+';
-        } else if(hidden)
+        }
+        else if(hidden)
         {
             return ' ';
         }

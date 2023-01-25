@@ -1,42 +1,29 @@
+/*
+    The hand class contains an ArrayList of cards.
+    This way it can be expanded to hold multiple cards
+    when the player decides to hit. It also has an int
+    that represents the player number.
+*/
 import java.util.ArrayList;
-
-public class Hand {
-
+public class Hand
+{
     private ArrayList<Card> hand;
-
-    private int player;
-
-
+    private final int player;
     public Hand(int inPlayer)
     {
         player = inPlayer;
         hand = new ArrayList<Card>(0);
     }
-
     public ArrayList<Card> getHand()
     {
         return hand;
     }
-
-    public void setHand(ArrayList<Card> inHand)
-    {
-        hand = inHand;
-    }
-
-    public int getPlayer()
-    {
-        return player;
-    }
-    public void addCard(Card inCard)
-    {
-        hand.add(inCard);
-    }
-
-    public Card getCard(int i)
-    {
-        return hand.get(i);
-    }
-
+    /*
+        Returns an int array only 2 long. The first value is for if
+        the player does not have an ace. If the player has an ace
+        it adds 10 to the first value to represent the case of
+        ace = 11
+    */
     public int[] getTotal()
     {
         int val = 0;
@@ -62,6 +49,11 @@ public class Hand {
         }
         return tempList;
     }
+    /*
+        Primary toString that is used in the program. Prints out the hand
+        as an ascii art image. Numbers in the corners, suit in the middle
+        just like a real card.
+     */
     public String toString()
     {
         String handString = "";
@@ -91,7 +83,8 @@ public class Hand {
             {
                 handString += "|   | ";
             }
-            else {
+            else
+            {
                 handString += "| " + hand.get(i).getSuit() + " | ";
             }
         }

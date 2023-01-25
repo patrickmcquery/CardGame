@@ -1,7 +1,14 @@
-import java.util.Scanner;
+/*
+    Patrick McQuery
 
-public class Main {
-    public static void main(String[] args) {
+    Main class for my blackjack program. Contains the loop for playing multiple games,
+    and the instructions.
+*/
+import java.util.Scanner;
+public class Main
+{
+    public static void main(String[] args)
+    {
         boolean playing = true;
         Scanner console = new Scanner(System.in);
         int players = 0;
@@ -19,7 +26,6 @@ public class Main {
                 System.out.println("As a player, you have two options. Hit or Stay/Stand. If you hit the dealer will pull");
                 System.out.println("the top card off the deck and add it to your hand. If you stay you pass your turn for the round.");
                 System.out.println("The dealer's first card is face down until their turn.");
-
                 System.out.print("How many players? ");
                 players = console.nextInt();
                 console.nextLine();

@@ -9,11 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14002b8c-d18f-4015-af5d-d40af797b68f" name="Changes" comment="Fixing winning logic">
-      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
+    <list default="true" id="14002b8c-d18f-4015-af5d-d40af797b68f" name="Changes" comment="Added instructions, added blackjack detection.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BlackJack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BlackJack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Deck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +75,9 @@
       <workItem from="1674495001136" duration="841000" />
       <workItem from="1674505975857" duration="2710000" />
       <workItem from="1674509719913" duration="779000" />
-      <workItem from="1674581513957" duration="1016000" />
+      <workItem from="1674581513957" duration="1316000" />
+      <workItem from="1674583676282" duration="191000" />
+      <workItem from="1674595865512" duration="3907000" />
     </task>
     <task id="LOCAL-00001" summary="First day of work">
       <created>1674145426088</created>
@@ -111,7 +114,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674509606482</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added instructions, added blackjack detection.">
+      <created>1674582820533</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1674582820533</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -134,7 +144,8 @@
     <MESSAGE value="Second day of work." />
     <MESSAGE value="Work from programming club" />
     <MESSAGE value="Fixing winning logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixing winning logic" />
+    <MESSAGE value="Added instructions, added blackjack detection." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added instructions, added blackjack detection." />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

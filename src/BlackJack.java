@@ -1,22 +1,29 @@
+/*
+    The primary blackjack class. This contains all game logic.
+    The Shoe size (amount of decks used) can be adjusted in the code.
+    The number of players is set in the constructor.
+*/
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 import java.util.Stack;
-
-public class BlackJack {
-
+public class BlackJack
+{
     private final int SHOELENGTH = 4;
-    private int numPlayers;
-    private Stack<Card> shoe;
-
-    private ArrayList<Hand> hands;
+    private final int numPlayers;
+    private final Stack<Card> shoe;
+    private final ArrayList<Hand> hands;
     public BlackJack(int inNumPlayers)
     {
         numPlayers = inNumPlayers;
         hands = new ArrayList<Hand>(numPlayers);
         shoe = new Stack<Card>();
     }
-
+    /*
+        Main game method. Starts by creating a new shoe and dealing cards to all players.
+        Goes through playing with each player, and does the dealer turn. Then checks who
+        wins, ties, or loses.
+    */
     public void play()
     {
         newShoe();
@@ -76,7 +83,8 @@ public class BlackJack {
                                     playerCanPlay.set(i, false);
                                     break;
                                 }
-                                default: {
+                                default:
+                                {
                                     System.out.println("Invalid response given, please try again.");
                                     break;
                                 }
@@ -96,20 +104,9 @@ public class BlackJack {
 
             }
         }
-
         //Dealers turn begins
         playersPlaying = true;
         boolean dealerBusted = false;
-
-        /*for(int i = 0; i < numPlayers; i++)
-        {
-            if(!playerWins.contains(true))
-            {
-                playersPlaying = false;
-            }
-        }
-         */
-
         while(playersPlaying)
         {
             if (hands.get(numPlayers).getTotal()[0] == 21 || hands.get(numPlayers).getTotal()[1] == 21)
@@ -118,7 +115,8 @@ public class BlackJack {
                 playerWins.set(numPlayers, true);
                 System.out.println("The Dealer got a blackjack.");
 
-            } else if(hands.get(numPlayers).getTotal()[0] >= 17 || hands.get(numPlayers).getTotal()[1] >= 17)
+            }
+            else if(hands.get(numPlayers).getTotal()[0] >= 17 || hands.get(numPlayers).getTotal()[1] >= 17)
             {
                 playersPlaying = false;
             }
@@ -133,17 +131,9 @@ public class BlackJack {
             }
         }
         hands.get(numPlayers).getHand().get(0).unhide();
-        boolean useDealerSecond = false;
-        if(hands.get(numPlayers).getTotal()[0] < hands.get(numPlayers).getTotal()[1] && hands.get(numPlayers).getTotal()[1] < 22)
-        {
-            useDealerSecond = true;
-        }
+        boolean useDealerSecond = hands.get(numPlayers).getTotal()[0] < hands.get(numPlayers).getTotal()[1] && hands.get(numPlayers).getTotal()[1] < 22;
         //Dealer turn ends
-
-        // INSERT NOTEBOOK LOGIC
-
         showBoard();
-
         for(int i = 0; i < numPlayers; i++)
         {
             for(int j = 0; j < 2; j++)
@@ -160,7 +150,6 @@ public class BlackJack {
                 }
             }
         }
-
         if(dealerBusted)
         {
             for(int i = 0; i < numPlayers; i++)
@@ -176,7 +165,7 @@ public class BlackJack {
         {
             int player = i + 1;
 
-            if(playerWins.get(i) == true)
+            if(playerWins.get(i))
             {
                 if(hands.get(i).getTotal()[0] == hands.get(numPlayers).getTotal()[0] || hands.get(i).getTotal()[1] == hands.get(numPlayers).getTotal()[0])
                 {
@@ -186,21 +175,18 @@ public class BlackJack {
                 {
                     System.out.println("Player " + player + " won!");
                 }
-            }else if(playerWins.get(i) == false)
+            }
+            else
             {
                 System.out.println("Player " + player + " lost.");
             }
         }
     }
+    //Prints the dealer and players hands
     private void showBoard()
     {
         System.out.println("Dealer has: ");
         System.out.println(hands.get(numPlayers));
-        showPlayers();
-    }
-
-    private void showPlayers()
-    {
         for(int i = 0; i < numPlayers; i++)
         {
             int player = i + 1;
@@ -208,7 +194,7 @@ public class BlackJack {
             System.out.println(hands.get(i).toString());
         }
     }
-
+    //Deals cards to everyone
     private void newDeal()
     {
         for(int i = 0; i < numPlayers + 1; i++)
@@ -224,7 +210,7 @@ public class BlackJack {
         }
         hands.get(numPlayers).getHand().get(0).hide();
     }
-
+    //Creates a new shoe based on the SHOELENGTH
     private void newShoe()
     {
         for(int i = 0; i < SHOELENGTH; i++)
